@@ -2,6 +2,8 @@ rulesBtn = document.getElementById('rules-btn')
 rules = document.getElementById('rules')
 closeBtn = document.getElementById('close-btn')
 
+
+// Rules open and clos event handlers
 rulesBtn.addEventListener('click', () => {
     rules.classList.add('show')
 })
