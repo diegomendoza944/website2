@@ -1,5 +1,4 @@
-rulesBtn = document.getElementById
-('rules-btn')
+rulesBtn = document.getElementById('rules-btn')
 rules = document.getElementById('rules')
 closeBtn = document.getElementById('close-btn')
 
