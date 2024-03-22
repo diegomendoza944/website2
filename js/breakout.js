@@ -17,8 +17,6 @@ ball = {
     dx: 4,
     dy: -4,
 }
-
-
 paddle = {
     x: canvas.width / 2 - 40,
     y: canvas.height - 20,
@@ -50,7 +48,6 @@ for (let i = 0; i < BrickRowCount; i++) {
         }
     }
 }
-
 function drawPaddle() {
     ctx.beginPath()
     ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h)
@@ -58,7 +55,6 @@ function drawPaddle() {
     ctx.fill()
     ctx.closePath()
 }
-
 function drawBall() {
     ctx.beginPath()
     ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2, true)
@@ -67,7 +63,6 @@ function drawBall() {
     ctx.closePath()
     ctx.stroke()
 }
-
 function drawScore() {
     ctx.font = '20px Arial'
     ctx.fillText(`Score: ${score}`, canvas.width - 100, 30)
@@ -84,7 +79,6 @@ function drawBricks() {
         })
     })
 }
-
 function movePaddle() {
     paddle.x = paddle.x + paddle.dx
 
@@ -96,7 +90,6 @@ function movePaddle() {
         paddle.x = canvas.width - paddle.w
     }
 }
-
 function draw() {
     ctx.clearRect(0 , 0,canvas.width,canvas.height)
     drawPaddle()
@@ -110,7 +103,6 @@ function update() {
     draw()
     requestAnimationFrame(update)
 }
-
 update ()
 
 function keyDown(e) {
@@ -127,7 +119,6 @@ function keyUp(e) {
     if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'd' || e.key == 'ArrowLeft' || e.key == 'Left' || e.key == 'a')
         paddle.dx = 0
 }
-
 document.addEventListener('keydown', keyDown)
 document.addEventListener('keyup', keyUp)
 
