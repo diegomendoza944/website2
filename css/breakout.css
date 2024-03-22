@@ -1,4 +1,4 @@
-* {
+*{
     box-sizing: border-box;
 }
 
@@ -10,8 +10,9 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sams-serif;
 }
+
 
 canvas {
     background: #f0f0f0;
@@ -19,27 +20,34 @@ canvas {
     border-radius: 5px;
 }
 
-h1{
+
+h1 {
     font-size: 45px;
-    color: white;
+    color: #ffffff;
 }
 
-.btn{
+
+.btn {
     cursor: pointer;
     border: 0;
-    padding: 10px 20px;
+    padding: 10px, 20px;
     background: #000000;
-    color: white;
+    color: #ffffff;
     border-radius: 5px;
+
+
 }
+
 
 .btn:hover {
     background: #222222;
 }
 
+
 .btn:active {
     transform: scale(0.98);
 }
+
 
 .rules-btn {
     position: absolute;
@@ -47,20 +55,23 @@ h1{
     left: 30px;
 }
 
+
 .rules {
     position: absolute;
     top: 0;
     left: 0;
     background: #333333;
-    color: white;
+    color: #ffffff;
     min-height: 100vh;
     width: 400px;
     padding: 20px;
     line-height: 1.5;
     transform: translateX(-400px);
-    transition: transform 1s ease-in-out;
+    transition: transform  1s ease-in-out (0);
+
 }
 
 .rules.show {
     transform: translateX (0);
+
 }
