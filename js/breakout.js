@@ -98,7 +98,10 @@ function draw() {
     drawBricks()
 }
 
+
+
 function update() {
+    moveBall()
     movePaddle()
     draw()
     requestAnimationFrame(update)
