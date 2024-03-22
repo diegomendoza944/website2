@@ -4,6 +4,10 @@ closeBtn = document.getElementById('close-btn')
 canvas = document.getElementById('canvas')
 ctx = canvas.getContext('2d')
 
+score = 0
+
+brickRowCount = 9
+brickColumnCount = 5
 // create ball properties
 ball = {
     x: canvas.width / 2,
@@ -19,6 +23,16 @@ function drawScore() {
     ctx.font = '20px Arial'
     ctx.fillText(`Score: ${score}`, canvas.width-100, 30)
 }
+
+paddle = {
+    x: canvas.width / 2 - 40,
+    y: canvas.height - 20,
+    w: 80,
+    h: 10,
+    speed: 8,
+    dx: 0,
+}
+
 
 
 // draw ball on canvas
