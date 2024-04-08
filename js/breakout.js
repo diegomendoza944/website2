@@ -108,12 +108,10 @@ if (ball.y + ball.size < 0) {
     ball.dy = -1 * ball.dy
 }
 if (ball.x + ball.size > canvas.width) {
-    ball.dix = -1 * ball.dx
+    ball.dx = -1 * ball.dx
 }
 
-if (ball.y + ball.size > canvas.height) {
-    
-}
+
 }
 function update() {
     moveBall()
