@@ -1,77 +1,220 @@
-*{
-    box-sizing: border-box;
+show = document.getElementById('rules-btn')
+close = document.getElementById('close-btn')
+rules = document.getElementById('rules')
+canvas = document.getElementById('canvas')
+ctx = canvas.getContext('2d')
+playAgainBtn = document.getElementById('p-a-b');
+quitBtn = document.getElementById('q-b');
+gameoverDiv = document.getElementById('gameover');
+
+score = 0
+BrickRowCount = 9
+BrickColumnCount = 5
+
+ball = {
+    x: canvas.width / 2,
+    y: canvas.height - 30,
+    size: 10,
+    speed: 4,
+    dx: 4,
+    dy: -4
 }
 
-body {
-    background-color: #0095dd;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    font-family: Arial, Helvetica, sams-serif;
+paddle = {
+    x: canvas.width / 2 - 40,
+    y: canvas.height - 20,
+    w: 80,
+    h: 10,
+    speed: 8,
+    dx: 0
 }
 
-
-canvas {
-    background: #f0f0f0;
-    display: block;
-    border-radius: 5px;
+BrickInfo = {
+    w: 70,
+    h: 20,
+    padding: 10,
+    offsetX: 45,
+    offsetY: 60,
+    visible: true
 }
 
+bricks = []
 
-h1 {
-    font-size: 45px;
-    color: #ffffff;
-}
-
-
-.btn {
-    cursor: pointer;
-    border: 0;
-    padding: 10px, 20px;
-    background: #000000;
-    color: #ffffff;
-    border-radius: 5px;
-
-
-}
-
-
-.btn:hover {
-    background: #222222;
-}
-
-
-.btn:active {
-    transform: scale(0.98);
-}
-
-
-.rules-btn {
-    position: absolute;
-    top: 30px;
-    left: 30px;
+function gameover () {
+    score = 0;
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height - 30;
 }
 
 
-.rules {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #333333;
-    color: #ffffff;
-    min-height: 100vh;
-    width: 400px;
-    padding: 20px;
-    line-height: 1.5;
-    transform: translateX(-400px);
-    transition: transform  1s ease-in-out (0);
-
+function resetGame() {
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height - 30;
 }
 
-.rules.show {
-    transform: translateX (0);
-
+for (let i = 0; i < BrickRowCount; i++) {
+    bricks[i] = []
+    for (let j = 0; j < BrickColumnCount; j++) {
+        const x = i * (BrickInfo.w + BrickInfo.padding) + BrickInfo.offsetX
+        const y = j * (BrickInfo.h + BrickInfo.padding) + BrickInfo.offsetY
+        bricks[i][j] = {
+            x,
+            y,
+            ...BrickInfo
+        }
+    }
 }
+
+function drawPaddle() {
+    ctx.beginPath()
+    ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h)
+    ctx.fillStyle = '#0095DD'
+    ctx.fill()
+    ctx.closePath()
+}
+
+function drawBall() {
+    ctx.beginPath()
+    ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2, true)
+    ctx.fillStyle = '#0095DD'
+    ctx.fill()
+    ctx.closePath()
+}
+
+function drawScore() {
+    ctx.font = '20px Arial'
+    ctx.fillText(`Score: ${score}`, canvas.width - 100, 30)
+}
+
+function drawBricks() {
+    bricks.forEach(column => {
+        column.forEach(brick => {
+            if (brick.visible) {
+                ctx.beginPath()
+                ctx.rect(brick.x, brick.y, brick.w, brick.h)
+                ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent'
+                ctx.fill()
+                ctx.closePath()
+            }
+        })
+    })
+}
+
+function movePaddle() {
+    paddle.x += paddle.dx
+
+    if (paddle.x < 0) {
+        paddle.x = 0
+    }
+
+    if (paddle.x + paddle.w > canvas.width) {
+        paddle.x = canvas.width - paddle.w
+    }
+}
+function moveBall() {
+    ball.x += ball.dx
+    ball.y += ball.dy
+
+    if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
+        ball.dx *= -1
+    }
+
+    if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
+        ball.dy *= -1
+    }
+
+    if (ball.y + ball.size > canvas.height) {
+        gameover();
+    }
+
+    if (
+        ball.x - ball.size > paddle.x &&
+        ball.x + ball.size < paddle.x + paddle.w &&
+        ball.y + ball.size > paddle.y
+    ) {
+        ball.dy = -ball.speed
+    }
+    bricks.forEach(column => {
+        column.forEach(brick => {
+            if (brick.visible) {
+                if (
+                    ball.x - ball.size > brick.x &&
+                    ball.x + ball.size < brick.x + brick.w &&
+                    ball.y - ball.size < brick.y + brick.h &&
+                    ball.y + ball.size > brick.y
+                ) {
+                    ball.dy *= -1
+                    brick.visible = false
+                    increaseScore()
+                }
+            }
+        })
+    })
+}
+
+function increaseScore() {
+    score++
+    if (score == BrickRowCount * BrickColumnCount) {
+        score = 0
+        showAllBricks()
+    }
+}
+function showAllBricks() {
+    bricks.forEach(column => {
+        column.forEach(brick => {
+            brick.visible = true
+        })
+    })
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    drawPaddle()
+    drawBall()
+    drawScore()
+    drawBricks()
+}
+
+function update() {
+    moveBall()
+    movePaddle()
+    draw()
+    requestAnimationFrame(update)
+}
+update()
+
+function keyDown(e) {
+    if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'd') {
+        paddle.dx = paddle.speed
+    }
+
+    if (e.key == 'ArrowLeft' || e.key == 'Left' || e.key == 'a') {
+        paddle.dx = -paddle.speed
+    }
+}
+
+function keyUp(e) {
+    if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'd' || e.key == 'ArrowLeft' || e.key == 'Left' || e.key == 'a')
+        paddle.dx = 0
+}
+
+document.addEventListener('keydown', keyDown)
+document.addEventListener('keyup', keyUp)
+
+show.addEventListener('click', () => {
+    rules.classList.toggle('show')
+})
+
+close.addEventListener('click', () => {
+    rules.classList.toggle('show')
+    playAgainBtn.addEventListener('click', () => {
+        gameoverDiv.classList.remove('show');
+        score = 0;
+        ball.x = canvas.width / 2;
+        ball.y = canvas.height - 30;
+    });
+
+    quitBtn.addEventListener('click', () => {
+        gameoverDiv.classList.remove('show');
+    });
+})
