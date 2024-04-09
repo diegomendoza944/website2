@@ -114,3 +114,21 @@ h1 {
 .message.visible {
     transform: translate(-50%, 150%);
 }
+
+.insect {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 500px;
+    left: 200px;
+    transform: translate(-50%, -50%) scale(2);
+}
+
+.insect img {
+    width: 100px;
+    height:
+}
