@@ -7,8 +7,8 @@ const game_container = document.getElementById('game-container')
 const start_btn = document. getElementById('start-btn')
 
 const timeEl = document.getElementById('time')
-const scoreEl = document,getElementById('score')
-const message = document,getElementById('message')
+const scoreEl = document.getElementById('score')
+const message = document.getElementById('message')
 let seconds = 0
 let score = 0
 let selected_insect = {}
