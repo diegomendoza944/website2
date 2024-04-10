@@ -8,3 +8,4 @@ const message = document,getElementById('message')
 let seconds = 0
 let score = 0
 let selected_insect = {}
+
