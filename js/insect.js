@@ -29,6 +29,10 @@ choose_insect_btns.forEach(btn => {
     })
 })
 
+function startGame() {
+    setInterval(in)
+}
+
 
 function createInsect() {
     const insect = document.createElement('div')
