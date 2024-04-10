@@ -23,5 +23,6 @@ choose_insect_btns.forEach(btn => {
         const alt = img.getAttribute('alt')
         const src = img.getAttribute('src')
         screen[1].classList.add('up')
+        selected_insect = {src, alt}
     })
 })
