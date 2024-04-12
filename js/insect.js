@@ -93,16 +93,3 @@ function getRandomLocation() {
     return {x,y}
 }
 
-function wl() {
-    if (score > 59 && seconds < 31)
-    {
-        w.classList.add('visible')
-        message.classList.remove('visible')
-    }
-
-    if (seconds > 30 && score < 60)
-    {
-        l.classList.add('visible')
-        message.classList.remove('visible')
-    }
-}
