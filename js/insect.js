@@ -92,3 +92,17 @@ function getRandomLocation() {
     const y = Math.random() * (height - 200) + 100
     return {x,y}
 }
+
+function wl() {
+    if (score > 59 && seconds < 31)
+    {
+        w.classList.add('visible')
+        message.classList.remove('visible')
+    }
+
+    if (seconds > 30 && score < 60)
+    {
+        l.classList.add('visible')
+        message.classList.remove('visible')
+    }
+}
