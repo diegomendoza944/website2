@@ -1,11 +1,17 @@
 show = document.getElementById('rules-btn');
+
 close = document.getElementById('close-btn');
+
 rules = document.getElementById('rules');
+
 canvas = document.getElementById('canvas');
+
 ctx = canvas.getContext('2d');
 
 score = 0;
+
 BrickRowCount = 9;
+
 BrickColumnCount = 5;
 
 ball = {
@@ -36,6 +42,7 @@ BrickInfo = {
 };
 
 bricks = [];
+
 for (let i = 0; i < BrickRowCount; i++) {
     bricks[i] = [];
     for (let j = 0; j < BrickColumnCount; j++) {

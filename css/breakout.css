@@ -25,6 +25,7 @@ h1 {
     margin: 5px;
 }
 
+
 .btn:hover {
     background: grey;
 }
@@ -38,6 +39,7 @@ h1 {
     top: 30px;
     left: 30px;
 }
+
 
 .rules {
     position: absolute;
@@ -60,7 +62,7 @@ h1 {
 }
 
 canvas {
-    background: grey;
+    background: #CCD1D1;
     display: block;
     border-radius: 5px;
 }
