@@ -12,4 +12,20 @@ let selectedIndex = Math.floor(word.length * Math.random())
 
 let selectedWord = word[selectedIndex]
 
-console.log(selector.word)
+const correctLetters = []
+const wrongLetter = []
+
+// Show hidden word
+function displayWord() {
+    wordEl.innerHTML = `
+    ${selectedWord
+        .split('')
+        .map(letter => `
+        <span class="Letter">
+        ${correctLetters.includes(letter) ? letter : ''}
+        </span>
+        ` )}
+
+    `
+}
+displayWord
