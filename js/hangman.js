@@ -22,7 +22,8 @@ function displayWord() {
         .split('')
         .map(letter => `
         <span class="Letter">
-        ${correctLetters.includes(letter) ? letter : ''}
+        ${correctLetters.includes(letter) ?
+            letter : ''}
         </span>
         ` ).join('')
     }
