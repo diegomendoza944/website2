@@ -36,4 +36,9 @@ function displayWord() {
         popup.style.display = 'flex'
     }
 }
-displayWord
+
+// keydown letter press
+window.addEventListener('keydown', e => {
+    console.log(e.keyCode)
+})
+displayWord()
