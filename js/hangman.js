@@ -29,7 +29,7 @@ function displayWord() {
     }
 
     `
-
-    console.log(wordEl.innerText)
+    const innerWord = wordEl.innerText..replace(/\n/g, '')
+    console.log(wordEl.innerText, innerWord)
 }
 displayWord
