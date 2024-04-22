@@ -29,5 +29,7 @@ function displayWord() {
     }
 
     `
+
+    console.log(wordEl.innerText)
 }
 displayWord
