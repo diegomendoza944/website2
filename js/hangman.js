@@ -14,6 +14,8 @@ let selectedWord = word[selectedIndex]
 const correctLetters = []
 const wrongLetters = []
 
+let gameRunning = true
+
 function displayWord() {
     wordEl.innerHTML = `
     ${selectedWord.split('').map(letter => `
@@ -22,21 +24,19 @@ function displayWord() {
         </span>
     `).join('')}
 `
+
     const innerWord = wordEl.innerText.replace(/\n/g, '')
-    if (innerWord == selectedWord) {
+    if (innerWord === selectedWord) {
         finalMessage.innerText = 'Congratulations! You won!'
-        popup.stly.display = 'flex'
+        popup.style.display = 'flex'
+        gameRunning = false
     }
 }
 
-
-//update wrong letters
 function updateWrongLettersEl() {
     wrongLettersEl.innerHTML = ` ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
     ${wrongLetters.map(letter => `<span>${letter}</span>`)}
-
     `
-
 
     figureParts.forEach((part, index) => {
         const errors = wrongLetters.length
@@ -48,25 +48,24 @@ function updateWrongLettersEl() {
         }
     })
 
-    if (wrongLEtters.length == figureParts.length) {
-        finalMessage.innerText = 'You Lose!!'
+    if (wrongLetters.length === figureParts.length) {
+        finalMessage.innerText = `You Lose!!\n The word was "${selectedWord}"`
         popup.style.display = 'flex'
+        gameRunning = false
     }
-
 }
 
-//show notification
 function showNotification() {
     notification.classList.add('show')
 
     setTimeout(() => {
-        notifciation.classList.remove('show')
+        notification.classList.remove('show')
     }, 2000)
 }
 
-
-//keydown letter press
 window.addEventListener('keydown', e => {
+    if (!gameRunning) return
+
     if (e.keyCode >= 65 && e.keyCode <= 90) {
         const letter = e.key
 
@@ -78,9 +77,8 @@ window.addEventListener('keydown', e => {
                 showNotification()
             }
         } else {
-            if (!wrongLetters.include(letter)) {
+            if (!wrongLetters.includes(letter)) {
                 wrongLetters.push(letter)
-
                 updateWrongLettersEl()
             } else {
                 showNotification()
@@ -93,15 +91,13 @@ playAgainBtn.addEventListener('click', () => {
     correctLetters.length = 0
     wrongLetters.length = 0
 
-
     selectedIndex = Math.floor(word.length * Math.random())
     selectedWord = word[selectedIndex]
 
     displayWord()
-
     updateWrongLettersEl()
-
-    popup.style.dsiplay = 'none'
-
+    popup.style.display = 'none'
+    gameRunning = true
 })
+
 displayWord()
