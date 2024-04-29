@@ -1,80 +1,107 @@
 const wordEl = document.getElementById('word')
-const wrongLettersEl = document.get.ElementById('wrong-letters')
-const playAgainBtn = document.getElementById('play-again)
-const popup = document.getELementById('popup-container')
+const wrongLettersEl = document.getElementById('wrong-letters')
+const playAgainBtn = document.getElementById('play-button')
+const popup = document.getElementById('popup-container')
 const notification = document.getElementById('notification-container')
 const finalMessage = document.getElementById('final-message')
 const figureParts = document.querySelectorAll('.figure-part')
 
-const word = ['application', 'programming', 'interface', 'wizard', 'dragon', 'money']
+const word = ['application', 'programming', 'interface', 'wizard']
 
 let selectedIndex = Math.floor(word.length * Math.random())
-
 let selectedWord = word[selectedIndex]
 
 const correctLetters = []
-const wrongLetter = []
+const wrongLetters = []
 
-// Show hidden word
 function displayWord() {
     wordEl.innerHTML = `
-    ${selectedWord
-        .split('')
-        .map(letter => `
-        <span class="Letter">
-        ${correctLetters.includes(letter) ?
-            letter : ''}
+    ${selectedWord.split('').map(letter => `
+        <span class="letter">
+            ${correctLetters.includes(letter) ? letter : ''}
         </span>
-        ` ).join('')
-    }
-
-    `
-    const innerWord = wordEl.innerText..replace(/\n/g, '')
-
+    `).join('')}
+`
+    const innerWord = wordEl.innerText.replace(/\n/g, '')
     if (innerWord == selectedWord) {
         finalMessage.innerText = 'Congratulations! You won!'
-        popup.style.display = 'flex'
+        popup.stly.display = 'flex'
     }
 }
 
+
+//update wrong letters
 function updateWrongLettersEl() {
-    console.log('Update Wrong')
-}
+    wrongLettersEl.innerHTML = ` ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
+    ${wrongLetters.map(letter => `<span>${letter}</span>`)}
 
-// Show Nitfication
-function showNotification () {
-    notification.classList. add('show')
+    `
 
-    setTimeout(() => {
-        notification.classList.remove('show')
-    }, 2000)
-}
 
-// keydown letter press
-window.addEventListener('keydown', e => {
-    console.log(e.keyCode {
-        if (e.keyCode >= 65 && e.keyCode <=90) {
-            const letter = e.key
+    figureParts.forEach((part, index) => {
+        const errors = wrongLetters.length
 
-            if(selectedWord.includes(letter)) {
-               if( !correctLetters.includes(letter)) {
-                correctLetters.push(letter)
-
-                displayWord()
-               } else {
-                showNotification()
-               }
-            } else {
-                if (!wrongLetters.includes(letter)){
-                    wrongLetters.push(letter)
-
-                    updateWrongLettersEl()
-                    else {
-                        showNotification()
-                    }
-                }
-            }
+        if (index < errors) {
+            part.style.display = 'block'
+        } else {
+            part.style.display = 'none'
         }
     })
 
+    if (wrongLEtters.length == figureParts.length) {
+        finalMessage.innerText = 'You Lose!!'
+        popup.style.display = 'flex'
+    }
+
+}
+
+//show notification
+function showNotification() {
+    notification.classList.add('show')
+
+    setTimeout(() => {
+        notifciation.classList.remove('show')
+    }, 2000)
+}
+
+
+//keydown letter press
+window.addEventListener('keydown', e => {
+    if (e.keyCode >= 65 && e.keyCode <= 90) {
+        const letter = e.key
+
+        if (selectedWord.includes(letter)) {
+            if (!correctLetters.includes(letter)) {
+                correctLetters.push(letter)
+                displayWord()
+            } else {
+                showNotification()
+            }
+        } else {
+            if (!wrongLetters.include(letter)) {
+                wrongLetters.push(letter)
+
+                updateWrongLettersEl()
+            } else {
+                showNotification()
+            }
+        }
+    }
+})
+
+playAgainBtn.addEventListener('click', () => {
+    correctLetters.length = 0
+    wrongLetters.length = 0
+
+
+    selectedIndex = Math.floor(word.length * Math.random())
+    selectedWord = word[selectedIndex]
+
+    displayWord()
+
+    updateWrongLettersEl()
+
+    popup.style.dsiplay = 'none'
+
+})
 displayWord()
