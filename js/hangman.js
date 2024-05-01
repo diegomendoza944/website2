@@ -6,7 +6,7 @@ const notification = document.getElementById('notification-container')
 const finalMessage = document.getElementById('final-message')
 const figureParts = document.querySelectorAll('.figure-part')
 
-const word = ['application', 'programming', 'interface', 'wizard']
+const word = ['pingpong', 'tennis', 'golf', 'wizard', 'basketball', 'football', 'soccer']
 
 let selectedIndex = Math.floor(word.length * Math.random())
 let selectedWord = word[selectedIndex]
@@ -87,11 +87,13 @@ window.addEventListener('keydown', e => {
     }
 })
 
+
 playAgainBtn.addEventListener('click', () => {
     correctLetters.length = 0
     wrongLetters.length = 0
 
     selectedIndex = Math.floor(word.length * Math.random())
+
     selectedWord = word[selectedIndex]
 
     displayWord()
@@ -99,5 +101,6 @@ playAgainBtn.addEventListener('click', () => {
     popup.style.display = 'none'
     gameRunning = true
 })
+
 
 displayWord()
