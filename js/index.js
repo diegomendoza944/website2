@@ -1,9 +1,9 @@
 
 function changeText() {
     const messageElement = document.getElementById('message');
-    messageElement.textContent = "The color is changed";
+    messageElement.textContent = "Hangman";
 
-    messageElement.style.backgroundColor = "#e0ffe0";
+    messageElement.style.backgroundColor = "white";
 
-    messageElement.style.color = "#008000";
+    messageElement.style.color = "black";
 }
