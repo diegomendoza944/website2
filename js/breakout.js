@@ -181,10 +181,15 @@ const restartButton = document.getElementById('restart-btn');
 const darkModeButton = document.getElementById('dark-mode-btn');
 
 function toggleDarkMode() {
+    
     darkMode = !darkMode;
+
     document.body.style.backgroundColor = darkMode ? '#222' : '#0095DD';
+
     canvas.style.background = darkMode ? '#333' : '#f0f0f0';
+
     ctx.fillStyle = darkMode ? '#fff' : '#0095DD';
+
     draw();
 }
 
