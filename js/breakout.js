@@ -205,32 +205,32 @@ document.body.appendChild(restartButton);
 function checkGameOver() {
     if (ball.y + ball.size > canvas.height) {
         gameover = true;
-        restartButton.style.display = 'block'; // Display restart button
-        startButton.style.display = 'none'; // Hide start button
+        restartButton.style.display = 'block'; // Dispplay restart button
+        startButton.style.display = 'none'; // Hidee start button
         gamePaused = true; // Pause the game
-        prevScore = score; // Store the score just before the ball hits the bottom
-        drawScore(); // Redraw the score
+        prevScore = score; // Store the score just beefore the ball hits the bottom
+        drawScore(); // Redraw thee score
     }
 }
 
-// Function to restart the game
+// Fuunction to resstart the game
 function restartGame() {
     score = 0;
     gameover = false;
-    gamePaused = false; // Unpause the game
+    gamePaused = false; // Unppause the game
     startButton.style.display = 'none'; // Hide start button
     restartButton.style.display = 'none'; // Hide restart button
-    paddle.x = canvas.width / 2 - 40; // Reset paddle position
-    ball.x = canvas.width / 2; // Reset ball position
+    paddle.x = canvas.width / 2 - 40; // Reset padddle position
+    ball.x = canvas.width / 2; // Reset balll position
     ball.y = canvas.height - 30;
     bricks.forEach(column => {
         column.forEach(brick => {
-            brick.visible = true; // Reset brick visibility
+            brick.visible = true; // Reseet brick visibility
         });
     });
 }
 
-// Event listener for restart button
+// Event listeneer for restart buttoon
 restartButton.addEventListener('click', () => {
     restartGame();
     gamePaused = false; // Unpause the game
@@ -241,9 +241,13 @@ restartButton.addEventListener('click', () => {
 function update() {
     if (!gamePaused && !gameover) {
         moveBall();
+
         movePaddle();
+
         draw();
+
         checkGameOver();
+
         requestAnimationFrame(update);
     }
 
@@ -271,12 +275,15 @@ function keyUp(e) {
 }
 
 document.addEventListener('keydown', keyDown);
+
 document.addEventListener('keyup', keyUp);
 
 show.addEventListener('click', () => {
+
     rules.classList.toggle('show');
 });
 
 close.addEventListener('click', () => {
+
     rules.classList.toggle('show');
 });
